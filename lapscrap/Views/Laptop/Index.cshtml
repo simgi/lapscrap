@@ -1,0 +1,123 @@
+﻿@model IEnumerable<lapscrap.Models.Laptop>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Modelname
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cpu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ram)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resolution)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gpu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ssd)
+        </th>
+        <th>
+            Measurements
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Battery)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Runtime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Review_url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ebay_url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Video_Url)
+        </th> 
+        <th>Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cpu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ram) gb
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Size)"
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resolution)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gpu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ssd) gb
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Width) x @Html.DisplayFor(modelItem => item.Length) x @Html.DisplayFor(modelItem => item.Height)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight) kg
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Battery) mAh/Wh
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Runtime)
+        </td>
+        <td>
+            <a href="@Html.DisplayFor(modelItem => item.Shop_url)">@Html.DisplayFor(modelItem => item.Price)€</a>
+        </td>
+        <td>
+            <a href="@Html.DisplayFor(modelItem => item.Review_url)">Review</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ebay_url)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Video_Url)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

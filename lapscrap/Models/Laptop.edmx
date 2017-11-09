@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="Laptop.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+  <EntityContainer Name="LaptopStoreContainer">
+    <EntitySet Name="LaptopSet" EntityType="Laptop.Store.LaptopSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EbayItemSet" EntityType="Laptop.Store.EbayItemSet" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="LaptopEbayItem" Association="Laptop.Store.LaptopEbayItem">
+      <End EntitySet="LaptopSet" Role="Laptop" />
+      <End EntitySet="EbayItemSet" Role="EbayItem" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="LaptopSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="Name" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Title" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Brand" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Cpu" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Ram" Nullable="false" Type="int" />
+    <Property Name="Size" Nullable="false" Type="real" />
+    <Property Name="Resolution" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Gpu" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Hd" Nullable="false" Type="int" />
+    <Property Name="Ssd" Nullable="false" Type="int" />
+    <Property Name="Width" Nullable="false" Type="real" />
+    <Property Name="Length" Nullable="false" Type="real" />
+    <Property Name="Height" Nullable="false" Type="real" />
+    <Property Name="Weight" Nullable="false" Type="real" />
+    <Property Name="Battery" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Runtime" Nullable="false" Type="int" />
+    <Property Name="Price" Nullable="false" Type="real" />
+    <Property Name="Review_url" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Shop_url" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Ebay_url" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Video_Url" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Components" Nullable="false" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="EbayItemSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="ItemId" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Title" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Subtitle" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="GalleryURL" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="ViewItemURL" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="postalCode" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Location" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Country" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="ShippingServiceCost" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="CurrentPrice" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="TimeLeft" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="ConditionId" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="ConditionDisplayName" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="LaptopId" Nullable="false" Type="int" />
+  </EntityType>
+  <Association Name="LaptopEbayItem">
+    <End Type="Laptop.Store.LaptopSet" Multiplicity="1" Role="Laptop" />
+    <End Type="Laptop.Store.EbayItemSet" Multiplicity="*" Role="EbayItem" />
+    <ReferentialConstraint>
+      <Principal Role="Laptop">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EbayItem">
+        <PropertyRef Name="LaptopId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Laptop" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="LaptopContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LaptopSet" EntityType="Laptop.Laptop" />
+          <EntitySet Name="EbayItemSet" EntityType="Laptop.EbayItem" />
+          <AssociationSet Name="LaptopEbayItem" Association="Laptop.LaptopEbayItem">
+            <End Role="Laptop" EntitySet="LaptopSet" />
+            <End Role="EbayItem" EntitySet="EbayItemSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Laptop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Brand" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Cpu" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Ram" Type="Int32" Nullable="false" />
+          <Property Name="Size" Type="Single" Nullable="false" />
+          <Property Name="Resolution" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Gpu" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Hd" Type="Int32" Nullable="false" />
+          <Property Name="Ssd" Type="Int32" Nullable="false" />
+          <Property Name="Width" Type="Single" Nullable="false" />
+          <Property Name="Length" Type="Single" Nullable="false" />
+          <Property Name="Height" Type="Single" Nullable="false" />
+          <Property Name="Weight" Type="Single" Nullable="false" />
+          <Property Name="Battery" Type="Int32" Nullable="false" />
+          <Property Name="Runtime" Type="String" Nullable="false" />
+          <Property Name="Price" Type="Single" Nullable="false" />
+          <Property Name="Review_url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Shop_url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Ebay_url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Video_Url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Components" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="EbayItem" Relationship="Laptop.LaptopEbayItem" FromRole="Laptop" ToRole="EbayItem" />
+        </EntityType>
+        <EntityType Name="EbayItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemId" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Subtitle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GalleryURL" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ViewItemURL" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="postalCode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ShippingServiceCost" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Name="CurrentPrice" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Name="TimeLeft" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ConditionId" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ConditionDisplayName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Laptop" Relationship="Laptop.LaptopEbayItem" FromRole="EbayItem" ToRole="Laptop" />
+          <Property Name="LaptopId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="LaptopEbayItem">
+          <End Type="Laptop.Laptop" Role="Laptop" Multiplicity="1" />
+          <End Type="Laptop.EbayItem" Role="EbayItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Laptop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EbayItem">
+              <PropertyRef Name="LaptopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping CdmEntityContainer="LaptopContainer" StorageEntityContainer="LaptopStoreContainer">
+    <EntitySetMapping Name="LaptopSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Laptop.Laptop)">
+        <MappingFragment StoreEntitySet="LaptopSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Cpu" ColumnName="Cpu" />
+          <ScalarProperty Name="Ram" ColumnName="Ram" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Resolution" ColumnName="Resolution" />
+          <ScalarProperty Name="Gpu" ColumnName="Gpu" />
+          <ScalarProperty Name="Hd" ColumnName="Hd" />
+          <ScalarProperty Name="Ssd" ColumnName="Ssd" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Battery" ColumnName="Battery" />
+          <ScalarProperty Name="Runtime" ColumnName="Runtime" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Review_url" ColumnName="Review_url" />
+          <ScalarProperty Name="Shop_url" ColumnName="Shop_url" />
+          <ScalarProperty Name="Ebay_url" ColumnName="Ebay_url" />
+          <ScalarProperty Name="Video_Url" ColumnName="Video_Url" />
+          <ScalarProperty Name="Components" ColumnName="Components" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EbayItemSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Laptop.EbayItem)">
+        <MappingFragment StoreEntitySet="EbayItemSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
+          <ScalarProperty Name="GalleryURL" ColumnName="GalleryURL" />
+          <ScalarProperty Name="ViewItemURL" ColumnName="ViewItemURL" />
+          <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="ShippingServiceCost" ColumnName="ShippingServiceCost" />
+          <ScalarProperty Name="CurrentPrice" ColumnName="CurrentPrice" />
+          <ScalarProperty Name="TimeLeft" ColumnName="TimeLeft" />
+          <ScalarProperty Name="ConditionId" ColumnName="ConditionId" />
+          <ScalarProperty Name="ConditionDisplayName" ColumnName="ConditionDisplayName" />
+          <ScalarProperty Name="LaptopId" ColumnName="LaptopId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
