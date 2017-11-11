@@ -4,66 +4,66 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="Laptop.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+    <Schema Namespace="Laptop.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="LaptopStoreContainer">
-    <EntitySet Name="LaptopSet" EntityType="Laptop.Store.LaptopSet" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="EbayItemSet" EntityType="Laptop.Store.EbayItemSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LaptopSet" EntityType="Laptop.Store.LaptopSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EbayItemSet" EntityType="Laptop.Store.EbayItemSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="LaptopEbayItem" Association="Laptop.Store.LaptopEbayItem">
-      <End EntitySet="LaptopSet" Role="Laptop" />
-      <End EntitySet="EbayItemSet" Role="EbayItem" />
+      <End Role="Laptop" EntitySet="LaptopSet" />
+      <End Role="EbayItem" EntitySet="EbayItemSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="LaptopSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="Name" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Title" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Brand" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Cpu" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Ram" Nullable="false" Type="int" />
-    <Property Name="Size" Nullable="false" Type="real" />
-    <Property Name="Resolution" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Gpu" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Hd" Nullable="false" Type="int" />
-    <Property Name="Ssd" Nullable="false" Type="int" />
-    <Property Name="Width" Nullable="false" Type="real" />
-    <Property Name="Length" Nullable="false" Type="real" />
-    <Property Name="Height" Nullable="false" Type="real" />
-    <Property Name="Weight" Nullable="false" Type="real" />
-    <Property Name="Battery" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Runtime" Nullable="false" Type="int" />
-    <Property Name="Price" Nullable="false" Type="real" />
-    <Property Name="Review_url" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Shop_url" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Ebay_url" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Video_Url" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Components" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Brand" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Cpu" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ram" Type="int" Nullable="false" />
+    <Property Name="Size" Type="real" Nullable="false" />
+    <Property Name="Resolution" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gpu" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Hd" Type="int" Nullable="false" />
+    <Property Name="Ssd" Type="int" Nullable="false" />
+    <Property Name="Width" Type="real" Nullable="false" />
+    <Property Name="Length" Type="real" Nullable="false" />
+    <Property Name="Height" Type="real" Nullable="false" />
+    <Property Name="Weight" Type="real" Nullable="false" />
+    <Property Name="Battery" Type="int" Nullable="false" />
+    <Property Name="Runtime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="real" Nullable="false" />
+    <Property Name="Review_url" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Shop_url" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ebay_url" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Video_Url" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Components" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="EbayItemSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-    <Property Name="ItemId" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Title" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Subtitle" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="GalleryURL" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="ViewItemURL" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="postalCode" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Location" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="Country" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="ShippingServiceCost" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="CurrentPrice" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="TimeLeft" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="ConditionId" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="ConditionDisplayName" Nullable="false" Type="nvarchar(max)" />
-    <Property Name="LaptopId" Nullable="false" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Subtitle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GalleryURL" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ViewItemURL" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="postalCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ShippingServiceCost" Type="real" Nullable="false" />
+    <Property Name="CurrentPrice" Type="real" Nullable="false" />
+    <Property Name="TimeLeft" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ConditionId" Type="int" Nullable="false" />
+    <Property Name="ConditionDisplayName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LaptopId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="LaptopEbayItem">
-    <End Type="Laptop.Store.LaptopSet" Multiplicity="1" Role="Laptop" />
-    <End Type="Laptop.Store.EbayItemSet" Multiplicity="*" Role="EbayItem" />
+    <End Role="Laptop" Type="Laptop.Store.LaptopSet" Multiplicity="1" />
+    <End Role="EbayItem" Type="Laptop.Store.EbayItemSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Laptop">
         <PropertyRef Name="Id" />
@@ -105,7 +105,7 @@
           <Property Name="Height" Type="Single" Nullable="false" />
           <Property Name="Weight" Type="Single" Nullable="false" />
           <Property Name="Battery" Type="Int32" Nullable="false" />
-          <Property Name="Runtime" Type="String" Nullable="false" />
+          <Property Name="Runtime" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Price" Type="Single" Nullable="false" />
           <Property Name="Review_url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Shop_url" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
@@ -119,7 +119,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ItemId" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Subtitle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="GalleryURL" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
@@ -127,10 +127,10 @@
           <Property Name="postalCode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Location" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Country" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="ShippingServiceCost" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="Max" />
-          <Property Name="CurrentPrice" Type="String" Nullable="false" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Name="ShippingServiceCost" Type="Single" Nullable="false" />
+          <Property Name="CurrentPrice" Type="Single" Nullable="false" />
           <Property Name="TimeLeft" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="ConditionId" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ConditionId" Type="Int32" Nullable="false" />
           <Property Name="ConditionDisplayName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Laptop" Relationship="Laptop.LaptopEbayItem" FromRole="EbayItem" ToRole="Laptop" />
           <Property Name="LaptopId" Type="Int32" Nullable="false" />
@@ -152,7 +152,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping CdmEntityContainer="LaptopContainer" StorageEntityContainer="LaptopStoreContainer">
+  <EntityContainerMapping StorageEntityContainer="LaptopStoreContainer" CdmEntityContainer="LaptopContainer">
     <EntitySetMapping Name="LaptopSet">
       <EntityTypeMapping TypeName="IsTypeOf(Laptop.Laptop)">
         <MappingFragment StoreEntitySet="LaptopSet">

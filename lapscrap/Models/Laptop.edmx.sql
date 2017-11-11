@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/09/2017 13:39:03
+-- Date Created: 11/09/2017 18:56:08
 -- Generated from EDMX file: d:\data\downloads\documents\visual studio 2015\Projects\lapscrap\lapscrap\Models\Laptop.edmx
 -- --------------------------------------------------
 
@@ -25,11 +25,11 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[LaptopSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[LaptopSet];
-GO
 IF OBJECT_ID(N'[dbo].[EbayItemSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[EbayItemSet];
+GO
+IF OBJECT_ID(N'[dbo].[LaptopSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[LaptopSet];
 GO
 
 -- --------------------------------------------------
@@ -67,7 +67,7 @@ GO
 -- Creating table 'EbayItemSet'
 CREATE TABLE [dbo].[EbayItemSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [ItemId] nvarchar(max)  NOT NULL,
+    [ItemId] int  NOT NULL,
     [Title] nvarchar(max)  NOT NULL,
     [Subtitle] nvarchar(max)  NOT NULL,
     [GalleryURL] nvarchar(max)  NOT NULL,
@@ -75,10 +75,10 @@ CREATE TABLE [dbo].[EbayItemSet] (
     [postalCode] nvarchar(max)  NOT NULL,
     [Location] nvarchar(max)  NOT NULL,
     [Country] nvarchar(max)  NOT NULL,
-    [ShippingServiceCost] nvarchar(max)  NOT NULL,
-    [CurrentPrice] nvarchar(max)  NOT NULL,
+    [ShippingServiceCost] real  NOT NULL,
+    [CurrentPrice] real  NOT NULL,
     [TimeLeft] nvarchar(max)  NOT NULL,
-    [ConditionId] nvarchar(max)  NOT NULL,
+    [ConditionId] int  NOT NULL,
     [ConditionDisplayName] nvarchar(max)  NOT NULL,
     [LaptopId] int  NOT NULL
 );

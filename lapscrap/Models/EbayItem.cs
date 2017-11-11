@@ -11,11 +11,16 @@ namespace lapscrap.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
     public partial class EbayItem
     {
         public int Id { get; set; }
-        public string ItemId { get; set; }
+        public int ItemId { get; set; }
         public string Title { get; set; }
         public string Subtitle { get; set; }
         public string GalleryURL { get; set; }
@@ -23,13 +28,31 @@ namespace lapscrap.Models
         public string postalCode { get; set; }
         public string Location { get; set; }
         public string Country { get; set; }
-        public string ShippingServiceCost { get; set; }
-        public string CurrentPrice { get; set; }
+        public float ShippingServiceCost { get; set; }
+        public float CurrentPrice { get; set; }
         public string TimeLeft { get; set; }
-        public string ConditionId { get; set; }
+        public int ConditionId { get; set; }
         public string ConditionDisplayName { get; set; }
         public int LaptopId { get; set; }
     
         public virtual Laptop Laptop { get; set; }
+
+        public EbayItem(JToken jToken)
+        {
+            //JToken jUser = jToken["item"][0];
+            ItemId = (int)jToken["itemId"][0];
+            Title = (string)jToken["title"][0];
+            //subtitle = (string)jToken["subtitle"][0];
+            GalleryURL = (string)jToken["galleryURL"][0];
+            ViewItemURL = (string)jToken["viewItemURL"][0];
+            postalCode = (string)jToken["postalCode"][0];
+            Location = (string)jToken["location"][0];
+            Country = (string)jToken["country"][0];
+            ShippingServiceCost = (float)jToken["shippingInfo"][0]["shippingServiceCost"][0]["__value__"];
+            CurrentPrice = (int)((float)(jToken["sellingStatus"][0]["currentPrice"][0]["__value__"]));
+            TimeLeft = (string)jToken["sellingStatus"][0]["timeLeft"][0];
+            ConditionId = (int)jToken["condition"][0]["conditionId"][0];
+            ConditionDisplayName = (string)jToken["condition"][0]["conditionDisplayName"][0];
+        }
     }
 }

@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f840825068c0491baa634a62be9fb719" Name="Diagram1" ZoomLevel="108" >
-        <EntityTypeShape EntityType="Laptop.Laptop" Width="1.5" PointX="4" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Laptop.Laptop" Width="1.5" PointX="3.625" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Laptop.EbayItem" Width="1.5" PointX="6.25" PointY="0.75" />
         <AssociationConnector Association="Laptop.LaptopEbayItem" />
       </Diagram>

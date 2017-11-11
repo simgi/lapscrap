@@ -74,6 +74,32 @@ namespace lapscrap.Controllers
             return View(laptop);
         }
 
+        public ActionResult Index(string sortOrder)
+        {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.CpuSortParm = sortOrder == "cpu" ? "cpu_desc" : "cpu";
+            ViewBag.CpuSortParm = sortOrder == "ram" ? "ram_desc" : "ram";
+
+            var laptops = from l in db.Laptops
+                           select l;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    laptops = laptops.OrderByDescending(l => l.Name);
+                    break;
+                case "cpu":
+                    laptops = laptops.OrderBy(l => l.Cpu);
+                    break;
+                case "cpu_desc":
+                    laptops = laptops.OrderByDescending(l => l.Cpu);
+                    break;
+                default:
+                    laptops = laptops.OrderBy(l => l.Price);
+                    break;
+            }
+            return View(laptops.ToList());
+        }
+
         // POST: Laptop/Edit/5
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.

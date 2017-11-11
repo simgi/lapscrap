@@ -9,9 +9,16 @@
 
 namespace lapscrap.Models
 {
+    using lapscrap.DAL;
     using System;
     using System.Collections.Generic;
-    
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
+    using System.Web;
+
     public partial class Laptop
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +26,7 @@ namespace lapscrap.Models
         {
             this.EbayItem = new HashSet<EbayItem>();
         }
-    
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
@@ -43,8 +50,129 @@ namespace lapscrap.Models
         public string Ebay_url { get; set; }
         public string Video_Url { get; set; }
         public string Components { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EbayItem> EbayItem { get; set; }
+
+        public Laptop(string components)
+        {
+            this.Components = components;
+            char delimiter = '•';
+            String[] compList = components.Split(delimiter);
+            if (compList.Count() >= 16)
+            {
+                delimiter = ':';
+                foreach (String component in compList)
+                {
+                    String[] compSearch = component.Split(delimiter);
+                    insertComponent(compSearch);
+                }
+            }
+            else
+                new Laptop();
+        }
+
+        public void insertComponent(String[] compArray)
+        {
+            int compValue = -1;
+            if (compArray[0].ToLower().Contains("cpu"))
+            {
+                // Bessere Lesbarkeit, nur Modellbezeichnung des CPUs (i5-7200u)
+                String[] Cpu = compArray[1].Split(',');
+                Cpu[0] = Cpu[0].Remove(0, 11);
+                this.Cpu = Cpu[0] ?? this.Cpu;
+            }
+            if (compArray[0].ToLower().Contains("ram"))
+            {
+                compValue = Util.firstInt(compArray[1]);
+                if (compValue > 0) this.Ram = compValue;
+            }
+            if (compArray[0].ToLower().Contains("hdd"))
+            {
+                compValue = Util.firstInt(compArray[1]);
+                if (compValue > 0) this.Hd = compValue;
+            }
+            if (compArray[0].ToLower().Contains("ssd"))
+            {
+                compValue = Util.firstInt(compArray[1]);
+                if (compValue > 0) this.Ssd = compValue;
+            }
+            if (compArray[0].ToLower().Contains("grafik"))
+            {
+                this.Gpu = compArray[1] ?? this.Gpu;
+            }
+            // Teile Display am "," Display-Größe, Auflösung. !Display-Eigenschaften fehlen
+            if (compArray[0].ToLower().Contains("display"))
+            {
+                String[] display = compArray[1].Split(',');
+                if (display.Count() >= 2)
+                {
+                    if (display[0].Contains("\""))
+                    {
+                        this.Size = Util.firstFloat(display[0].ToString());
+                    }
+                    this.Resolution = display[1].ToString() ?? this.Resolution;
+                }
+            }
+            if (compArray[0].ToLower().Contains("akku"))
+            {
+                this.Runtime = compArray[1];
+                Regex digitsOnly = new Regex(@"\d{2,4}(Wh)");
+                Match m = digitsOnly.Match(compArray[1]);
+                // Prüfe nach beiden Angaben Wh und mAh
+                if (m.Success)
+                {
+                    string s = m.Value;
+                    s = s.Replace("Wh", "");
+                    this.Battery = Int32.Parse(s);
+                }
+                // Wenn möglich wähle mAh
+                digitsOnly = new Regex(@"\d{2,4}(mAh)");
+                m = digitsOnly.Match(compArray[1]);
+                if (m.Success)
+                {
+                    string s = m.Value;
+                    s = s.Replace("mAh", "");
+                    this.Battery = Int32.Parse(s);
+                }
+
+            }
+            if (compArray[0].ToLower().Contains("gewicht"))
+            {
+                this.Weight = Util.firstFloat(compArray[1]);
+            }
+        }
+        public string title
+        {
+            get { return Title; }
+            set
+            {
+                Title = value ?? "undefined";
+                this.Name = title;
+                // Kürze den Titel an Kommas, Farben(weiß, schwarz, etc) und Klammern (
+                Regex check3spaces = new Regex(@"[^,]+");
+                Match m = check3spaces.Match(title);
+                if (m.Success)
+                {
+                    this.Name = m.Value;
+                }
+
+                // Bei Farbwort trennen
+                check3spaces = new Regex(@".+?(?=silber)|.+?(?=schwarz)|.+?(?=weiß)|.+?(?=grau)|.+?(?=gold)");
+                m = check3spaces.Match(this.Name);
+                if (m.Success)
+                {
+                    this.Name = m.Value;
+                }
+
+                // Bei Klammer trennen
+                check3spaces = new Regex(@"[^(]+");
+                m = check3spaces.Match(this.Name);
+                if (m.Success)
+                {
+                    this.Name = m.Value;
+                }
+            }
+        }
     }
 }

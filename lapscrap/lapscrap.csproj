@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LaptopController.cs" />
+    <Compile Include="DAL\EbayHandler.cs" />
     <Compile Include="DAL\Util.cs" />
     <Compile Include="DAL\LaptopContext.cs" />
     <Compile Include="DAL\LaptopInitializer.cs" />
